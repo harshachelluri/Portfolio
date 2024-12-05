@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Profile Section */
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid #1abc9c;
+            object-fit: cover;
+        }
+
+        .bio {
+            max-width: 60%;
+        }
+
+        h2 {
+            font-size: 36px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        /* About Me Section */
+        #about-me {
+            padding: 60px 0;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-img {
+            width: 35%;
+        }
+
+        .bio {
+            width: 60%;
+        }
+
+        /* Projects Section */
+        #projects {
+            padding: 60px 0;
+        }
+
+        .projects-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .project-card {
+            background-color: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        .project-card h3 {
+            font-size: 24px;
+            color: #1abc9c;
+        }
+
+        .project-card p {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #ccc;
+        }
+
+        .view-project {
+            color: #fff;
+            background-color: #1abc9c;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .view-project:hover {
+            background-color: #16a085;
+        }
+
+        /* Thank You Message */
+        .thank-you-message {
+            text-align: center;
+            font-size: 20px;
+            color: #fff;
+            margin-top: 30px;
+            background-color: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            text-align: center;
+            padding: 20px 0;
+            color: white;
+        }
+
+        .contact-icons {
+            margin-top: 20px;
+        }
+
+        .contact-icon {
+            font-size: 40px;
+            color: #1abc9c;
+            margin: 0 15px;
+            transition: opacity 0.3s;
+        }
+
+        .contact-icon:hover {
+            opacity: 0.8;
+        }
+
+        /* Pop-up Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #444;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            width: 300px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .popup h2 {
+            font-size: 24px;
+            color: #f8f8f8;
+            margin-bottom: 20px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .popup.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .close-btn {
+            background-color: #ff5c57;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .close-btn:hover {
+            background-color: #e04f47;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .projects-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .project-card {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+
+            .about-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .bio {
+                width: 100%;
+                text-align: center;
+            }
+
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pop-up content -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2>I'm delighted to introduce you to my data portfolio.</h2>
+        <button class="close-btn" id="closeBtn">View</button>
+    </div>
+
+    <!-- Portfolio content starts here -->
+    <section id="about-me" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-container">
+                <div class="about-img">
+                    <img src="my.png" alt="Profile Image" class="profile-img" />
+                </div>
+                <div class="bio">
+                    <p>
+                        Hi, I'm <strong>Chelluri Sri Harsha</strong>, a passionate Data Science enthusiast with a strong foundation in SQL, Python, and Power BI. 
+                        I am eager to apply my knowledge of machine learning and statistics to solve real-world problems. 
+                        I have hands-on experience in data analysis, visualization, and model building through projects. 
+                        I'm excited to contribute to impactful solutions in the field of data science.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2>My Projects</h2>
+            <div class="projects-container">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <h3>Project 1: Customer Subscription Management using MySQL</h3>
+                    <p>This project focuses on managing customer subscriptions and payments using MySQL, helping businesses track subscriptions, revenue, and customer engagement.<a href="https://github.com/SRI-HARSHA-CHELLURI/Customer-Subscription-Management-by-MYSQL/blob/main/README.md" target="_blank" class="view-project">View Project</a></p>   
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <h3>Project 2: Competitor Sales Analysis in Power BI</h3>
+                    <p>Developed interactive dashboards and data visualizations with Power BI to empower businesses with insights for data-driven decision-making. <a href="https://github.com/SRI-HARSHA-CHELLURI/Competitor-Sales-Analysis-in-Power-BI" target="_blank" class="view-project">View Project</a></p>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <h3>Project 3: Predictive Analytics for Business Growth with Python</h3>
+                    <p>This project uses Python and machine learning algorithms to predict business growth trends based on historical data, aiding companies in future planning. <a href="#" target="_blank" class="view-project">View Project</a></p>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <h3>Project 4: Sales Forecasting with Time Series Analysis</h3>
+                    <p>Implemented time series analysis in Python to predict future sales, enabling businesses to adjust strategies based on forecasted results.<a href="#" target="_blank" class="view-project">View Project</a></p>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <h3>Project 5: E-commerce Product Recommendation System</h3>
+                    <p>Built a recommendation engine for an e-commerce platform using collaborative filtering, enhancing user experience and driving sales.<a href="#" target="_blank" class="view-project">View Project</a></p>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <h3>Project 6: Data Analysis and Visualization for Marketing Campaign</h3>
+                    <p>Analyzed marketing campaign data and visualized insights using Python and Power BI to improve campaign effectiveness.<a href="#" target="_blank" class="view-project">View Project</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Connect with me:</p>
+        <div class="contact-icons">
+            <a href="https://www.linkedin.com/in/chellurisriharsha/" target="_blank" class="contact-icon"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/SRI-HARSHA-CHELLURI" target="_blank" class="contact-icon"><i class="bi bi-github"></i></a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=harshachelluri0159@gmail.com" class="contact-icon"><i class="bi bi-envelope"></i></a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const overlay = document.getElementById("overlay");
+            const popup = document.getElementById("popup");
+            const closeBtn = document.getElementById("closeBtn");
+
+            // Show the pop-up when the page is loaded
+            setTimeout(function () {
+                overlay.classList.add("show");
+                popup.classList.add("show");
+            }, 500);
+
+            // Close the pop-up when the close button is clicked
+            closeBtn.addEventListener("click", function () {
+                overlay.classList.remove("show");
+                popup.classList.remove("show");
+            });
+
+            // Close the pop-up when clicking on the overlay
+            overlay.addEventListener("click", function () {
+                overlay.classList.remove("show");
+                popup.classList.remove("show");
+            });
+        });
+    </script>
+</body>
+</html>
+
